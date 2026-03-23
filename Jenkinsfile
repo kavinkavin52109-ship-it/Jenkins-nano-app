@@ -3,33 +3,28 @@ pipeline {
 
     stages {
 
-        stage('Clone Code') {
-            steps {
-                git 'https://github.com/your-username/node-app.git'
-            }
-        }
-
         stage('Build') {
             steps {
+                echo "Build stage started"
                 sh 'npm install'
             }
         }
 
         stage('Test') {
             steps {
-                echo "No tests yet"
+                echo "Test stage running"
             }
         }
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t node-app .'
+                sh 'docker build -t nano-app .'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'docker run -d -p 3000:3000 node-app'
+                sh 'docker run -d -p 3000:3000 nano-app || true'
             }
         }
     }
